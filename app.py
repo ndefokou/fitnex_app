@@ -93,9 +93,28 @@ def login():
 
     return render_template('login.html')
 
+
 @app.route('/Workout_Logging', methods=['GET', 'POST'])
-@login_required
 def Workout_Logging():
+    app.secret_key = 'your-secret-key'
+
+    def create_tables():
+        with sqlite3.connect(db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS workouts (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    username TEXT,
+                    exercise TEXT,
+                    sets INTEGER,
+                    reps INTEGER,
+                    weight REAL
+                )
+            ''')
+            conn.commit()
+
+    create_tables()
+
     if request.method == 'POST':
         exercise = request.form.get('exercise')
         sets = int(request.form.get('sets'))
@@ -115,6 +134,7 @@ def Workout_Logging():
             conn.commit()
 
         return redirect(url_for('dashboard'))
+
     return render_template('Workout_Logging.html')
 
 @app.route('/dashboard')
