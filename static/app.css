@@ -1,0 +1,226 @@
+/* Styles for Workout Logging page */
+
+/* Add styling for the background container */
+.background-container {
+  background-image: url(../static/fitnex2.jpg);
+  background-size: cover;
+  background-position: center;
+  background-color: red;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: black; /* Text color */
+}
+
+body {
+  background-image: url(../static/fitnex2.jpg);
+  background-repeat: no-repeat;
+  background-position: inherit;
+  background-size: cover;
+}
+
+/* Add some styling for the buttons */
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+  border-radius: 4px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #45a049;
+}
+
+/* Add styling for the registration page */
+.register-container {
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  padding: 70px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+  text-align: center;
+}
+
+/* Style the form inside the registration container */
+.register-container form {
+  max-width: 400px;
+  margin: 0 auto; /* Center the form horizontally */
+}
+
+/* Add some styling for the registration form elements */
+.register-container label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.register-container input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px; /* Add margin between input boxes */
+}
+
+.register-container button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px; /* Add margin to separate the button from the inputs */
+}
+
+.register-container button:hover {
+  background-color: #45a049;
+}
+
+/* Add styling for the login page */
+.login-container {
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+  text-align: center;
+}
+
+/* Style the form inside the login container */
+.login-container form {
+  max-width: 400px;
+  margin: 0 auto; /* Center the form horizontally */
+}
+
+/* Add some styling for the login form elements */
+.login-container label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px; /* Add margin between input boxes */
+}
+
+.login-container button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px; /* Add margin to separate the button from the inputs */
+}
+
+.login-container button:hover {
+  background-color: #45a049;
+}
+
+.Workout_Logging-container p {
+  margin-top: 10px; /* Add margin to separate the paragraph from the button */
+}
+/* Add styling for the login page */
+.Workout_Logging-container {
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  padding: 70px;
+  padding-top: 0%;
+  padding-bottom: 0%;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+  text-align: center;
+}
+
+/* Style the form inside the login container */
+.Workout_Logging-container form {
+  max-width: 400px;
+  margin: 0 auto; /* Center the form horizontally */
+}
+
+/* Add some styling for the login form elements */
+.Workout_Logging-container label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.Workout_Logging-container input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px; /* Add margin between input boxes */
+}
+
+.workout_logging-container button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px; /* Add margin to separate the button from the inputs */
+}
+
+.workout_logging-container button:hover {
+  background-color: #45a049;
+}
+
+.workout_logging-container p {
+  margin-top: 10px; /* Add margin to separate the paragraph from the button */
+}
+
+.background-container {
+  background-image: url(../static/dashboard.jpg);
+  background-size: cover;
+  background-position: center;
+  background-color: red;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: black; /* Text color */
+}
+.dashboard-container {
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.dashboard.h1 {
+  color: #333;
+}
+
+.dashboard.h2 {
+  color: #555;
+}
+
+.dashboard.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.dashboard.th, td {
+  padding: 10px;
+  text-align: left;
+}
+
+.dashboard.th {
+  background-color: #ddd;
+  font-weight: bold;
+}
+
+.dashboard.tr:nth-child(even) {
+  background-color: #f9f9f9;
+}

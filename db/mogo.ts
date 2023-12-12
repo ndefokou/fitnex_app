@@ -1,0 +1,1 @@
+mongodb+srv://tcheutchouaarthur:<tnarthur08>@cluster0.mdiilpf.mongodb.net/fitnex
