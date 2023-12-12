@@ -5,7 +5,6 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from flask_pymongo import PyMongo
 import bcrypt
 
-
 app = Flask(__name__)
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/your_database_name'
 app.config['SECRET_KEY'] = 'your-secret-key'
@@ -38,6 +37,9 @@ def register():
         # Get user input from the registration form
         username = request.form.get('username')
         password = request.form.get('password')
+        weight = float(request.form.get('weight'))
+        height = float(request.form.get('height'))
+        sex = request.form.get('sex')
 
         # Check if the user already exists
         if mongo.db.users.find_one({'username': username}):
@@ -46,10 +48,13 @@ def register():
         # Hash the password before storing it (use a secure method in production)
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
-        # Add the user to the MongoDB collection
+        # Add the user to the MongoDB collection with additional fields
         user_id = mongo.db.users.insert_one({
             'username': username,
-            'password': hashed_password
+            'password': hashed_password,
+            'weight': weight,
+            'height': height,
+            'sex': sex
         }).inserted_id
 
         # Create a User object for Flask-Login
@@ -61,6 +66,8 @@ def register():
 
         return redirect(url_for('workout_logging'))
     return render_template('register.html')
+
+# Rest of your code...
 
 # Login route
 @app.route('/login', methods=['GET', 'POST'])
