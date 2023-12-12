@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Goal</title>
+</head>
+<body>
+    <h1>Edit Goal</h1>
+    <form action="/edit_goal/{{ goal_id }}" method="post">
+        <input type="text" name="goal_name" value="{{ goal.goal_name }}" required>
+        <textarea name="description" required>{{ goal.description }}</textarea>
+        <button type="submit">Save Changes</button>
+   </form>
+</body>
+</html>

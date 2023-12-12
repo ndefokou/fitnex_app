@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Workout Logging</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+</head>
+<body>
+    <div class="background-container">
+        <div class="Workout_Logging-container"> 
+            <h1>Workout Logging</h1>
+            <form method="POST" action="/Workout_Logging">
+                <label for="exercise">Exercise:</label>
+                <input type="text" id="exercise" name="exercise" required><br><br>
+                
+                <label for="sets">Sets:</label>
+                <input type="number" id="sets" name="sets" required><br><br>
+                
+                <label for="reps">Reps:</label>
+                <input type="number" id="reps" name="reps" required><br><br>
+                
+                <label for="weight">Weight:</label>
+                <input type="number" step="0.1" id="weight" name="weight" required><br><br>
+                
+                <input type="submit" value="Log Workout">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

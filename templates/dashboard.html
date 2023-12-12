@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Dashboard</h1>
+
+    <canvas id="goal-progress-chart"></canvas>
+
+    <script>
+        // Retrieve goal and progress data from the Flask route
+        var goals = {{ goals|tojson }};
+        var progress = {{ progress|tojson }};
+
+        // Extract relevant data for the chart
+        var goalNames = goals.map(function(goal) {
+            return goal.goal_name;
+        });
+
+        var progressSets = progress.map(function(goal) {
+            return goal.progress_sets;
+        });
+
+        var progressReps = progress.map(function(goal) {
+            return goal.progress_reps;
+        });
+
+        var progressWeight = progress.map(function(goal) {
+            return goal.progress_weight;
+        });
+
+        // Create the chart using Chart.js
+        var ctx = document.getElementById('goal-progress-chart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: goalNames,
+                datasets: [
+                    {
+                        label: 'Sets',
+                        data: progressSets,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Reps',
+                        data: progressReps,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Weight',
+                        data: progressWeight,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

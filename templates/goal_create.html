@@ -1,0 +1,16 @@
+<form method="POST" action="{{ url_for('create_goal') }}">
+    <!-- Goal name input -->
+    <div class="form-group">
+        <label for="goal_name">Goal Name</label>
+        <input type="text" class="form-control" id="goal_name" name="goal_name" required>
+    </div>
+
+    <!-- Description input -->
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" id="description" name="description" required></textarea>
+    </div>
+
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary">Create Goal</button>
+</form>
