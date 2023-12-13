@@ -1,16 +1,21 @@
-<form method="POST" action="{{ url_for('create_goal') }}">
-    <!-- Goal name input -->
-    <div class="form-group">
-        <label for="goal_name">Goal Name</label>
-        <input type="text" class="form-control" id="goal_name" name="goal_name" required>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Goal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class=".goal_create-form-container">
+        <h1>Create Goal</h1>
+        <form method="post" action="{{ url_for('create_goal') }}">
+            <label for="goal">Goal:</label>
+            <input type="text" id="goal" name="goal" required>
+            <br>
+            <label for="target">Target:</label>
+            <input type="number" id="target" name="target" required>
+            <br>
+            <button type="submit">Create Goal</button>
+        </form>
     </div>
-
-    <!-- Description input -->
-    <div class="form-group">
-        <label for="description">Description</label>
-        <textarea class="form-control" id="description" name="description" required></textarea>
-    </div>
-
-    <!-- Submit button -->
-    <button type="submit" class="btn btn-primary">Create Goal</button>
-</form>
+</body>
+</html>

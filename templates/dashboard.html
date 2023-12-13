@@ -2,21 +2,37 @@
 <html>
 <head>
     <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Welcome to the Dashboard</h1>
-    <h2>Goals:</h2>
-    <ul>
-        {% for goal in goals %}
-            <li>{{ goal.goal_name }} - {{ goal.description }}</li>
-        {% endfor %}
-    </ul>
-    
-    <h2>Create New Goal:</h2>
-    <form action="/create_goal" method="post">
-        <input type="text" name="goal_name" placeholder="Goal Name" required>
-        <textarea name="description" placeholder="Description" required></textarea>
-        <button type="submit">Create Goal</button>
-    </form>
+    <div class="background-container">
+        <h1>Welcome to the Dashboard</h1>
+        <h2>Your Workouts</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Exercise</th>
+                    <th>Sets</th>
+                    <th>Reps</th>
+                    <th>Weight</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for workout in workouts %}
+                <tr>
+                    <td>{{ workout[2] }}</td>
+                    <td>{{ workout[3] }}</td>
+                    <td>{{ workout[4] }}</td>
+                    <td>{{ workout[5] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <!-- Add the button to redirect to create_goal -->
+        <a href="{{ url_for('create_goal') }}">
+            <button>Create Goal</button>
+        </a>
+    </div>
 </body>
 </html>

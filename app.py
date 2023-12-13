@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_session import Session  # Import Flask-Session
+from flask_session import Session  
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key'
@@ -138,9 +138,10 @@ def Workout_Logging():
     return render_template('Workout_Logging.html')
 
 @app.route('/dashboard')
-@login_required
 def dashboard():
     username = session.get('username')
+    if not username:
+        return redirect(url_for('login'))
 
     with sqlite3.connect(db_path) as conn:
         cursor = conn.cursor()
@@ -149,28 +150,69 @@ def dashboard():
 
         cursor.execute('SELECT * FROM goals WHERE username = ?', (username,))
         goals = cursor.fetchall()
-
+            
     return render_template('dashboard.html', workouts=workouts, goals=goals)
 
-@app.route('/create_goal', methods=['POST'])
-@login_required
+@app.route('/create_goal', methods=['GET', 'POST'])
 def create_goal():
+    if request.method == 'POST':
+        username = session.get('username')
+        if not username:
+            return redirect(url_for('login'))
+
+        goal = request.form.get('goal')
+        target = int(request.form.get('target'))
+
+        with sqlite3.connect(db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT INTO goals (username, goal, target)
+                VALUES (?, ?, ?)
+            ''', (username, goal, target))
+            conn.commit()
+
+        return redirect(url_for('edit_goal'))
+    
+    return render_template('goal_create.html')
+
+@app.route('/edit_goal/<int:goal_id>', methods=['GET', 'POST'])
+@login_required
+def edit_goal(goal_id):
     username = session.get('username')
     if not username:
         return redirect(url_for('login'))
 
-    goal = request.form.get('goal')
-    target = int(request.form.get('target'))
-
+    # Retrieve the user's existing goals from the database
     with sqlite3.connect(db_path) as conn:
         cursor = conn.cursor()
-        cursor.execute('''
-            INSERT INTO goals (username, goal, target)
-            VALUES (?, ?, ?)
-        ''', (username, goal, target))
-        conn.commit()
+        cursor.execute('SELECT * FROM goals WHERE id = ? AND username = ?', (goal_id, username))
+        goal = cursor.fetchone()
 
-    return redirect(url_for('dashboard'))
+    if not goal:
+        return 'Goal not found or unauthorized'
+
+    if request.method == 'POST':
+        # Implement server-side code to handle goal update requests
+        new_description = request.form.get('goal')
+        new_target = int(request.form.get('target'))
+
+        # Validate the input
+        if not (new_description and isinstance(new_target, int)):
+            return 'Invalid input data'
+
+        # Update the goal data in the database
+        with sqlite3.connect(db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                UPDATE goals
+                SET goal = ?, target = ?
+                WHERE id = ? AND username = ?
+            ''', (new_description, new_target, goal_id, username))
+            conn.commit()
+
+        return redirect(url_for('dashboard'))
+
+    return render_template('edit_goal.html', goal=goal)
 
 @app.route('/logout')
 @login_required
