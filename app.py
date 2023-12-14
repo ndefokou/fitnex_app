@@ -176,11 +176,12 @@ def create_goal():
     return render_template('goal_create.html')
 
 @app.route('/edit_goal/<int:goal_id>', methods=['GET', 'POST'])
-@login_required
 def edit_goal(goal_id):
-    username = session.get('username')
-    if not username:
-        return redirect(url_for('login'))
+    try:
+        # Ensure goal_id is a valid integer
+        goal_id = int(goal_id)
+    except ValueError:
+        return 'Invalid goal ID'
 
     # Retrieve the user's existing goals from the database
     with sqlite3.connect(db_path) as conn:
